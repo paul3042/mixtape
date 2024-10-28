@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 
-import SpotifyLogin from './Components/SpotifyLogin';
+import Header from './Components/Header';
 import SearchBar from './Components/SearchBar';
 import SearchResults from './Components/SearchResults';
 import Playlist from './Components/Playlist';
-import SaveToSpotify from './Components/SaveToSpotify';
 
 import './App.css';
 
@@ -18,33 +17,51 @@ function App() {
   const [playlistTitle, setPlaylistTitle] = useState('Your Playlist');
   const [searchSubmitted, setSearchSubmitted] = useState(false);
 
+  const [tokenErrorMessage, setTokenErrorMessage] = useState('');
+  const [accessToken, setAccessToken] = useState(null);
+  const [tokenExpirationTime, setTokenExpirationTime] = useState(null);
+
   return (
     <div className="App">
-      <h1>mixtape</h1>
-      <SpotifyLogin
-        setUserId={setUserId} />
+      <Header
+        className="header"
+
+        setUserId={setUserId}
+        setTokenErrorMessage={setTokenErrorMessage}
+        accessToken={accessToken}
+        setAccessToken={setAccessToken}
+        setTokenExpirationTime={setTokenExpirationTime} />
+
       <SearchBar
+        className="searchbar"
+
+        tokenErrorMessage={tokenErrorMessage}
+        accessToken={accessToken}
+        tokenExpirationTime={tokenExpirationTime}
         setTracks={setTracks}
         searchType={searchType}
         setSearchType={setSearchType}
         setSearchErrorMessage={setSearchErrorMessage}
         setSearchSubmitted={setSearchSubmitted}
         userId={userId} />
+
       <SearchResults
+        className="search-results"
+
         tracks={tracks}
         searchErrorMessage={searchErrorMessage}
         selectedTracks={selectedTracks}
         setSelectedTracks={setSelectedTracks}
         searchSubmitted={searchSubmitted} />
+
       <Playlist
+       className="playlist"
+       
+        userId={userId}
         selectedTracks={selectedTracks}
         setSelectedTracks={setSelectedTracks}
         playlistTitle={playlistTitle}
         setPlaylistTitle={setPlaylistTitle} />
-      <SaveToSpotify
-        userId={userId}
-        selectedTracks={selectedTracks}
-        playlistTitle={playlistTitle} />
     </div>
   );
 }

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
-function SearchBar({ setTracks, searchType,
-    setSearchType, setSearchErrorMessage, setSearchSubmitted, userId }) {
+function SearchBar({ className, setTracks, searchType,
+    setSearchType, setSearchErrorMessage, setSearchSubmitted, userId,
+    accessToken, tokenExpirationTime, tokenErrorMessage }) {
     const [userInput, setUserInput] = useState('');
     const [loginMessage, setLoginMessage] = useState('');
 
@@ -76,7 +77,20 @@ function SearchBar({ setTracks, searchType,
 
 
     return (
-        <>
+        <div className={className}>
+            {accessToken && (
+                <>
+                    {userId ? (
+                        <>
+                            <p>Signed in as {userId}</p>
+                            {tokenErrorMessage ? (<p style={{ color: 'red' }}>{tokenErrorMessage}</p>)
+                                : (<p>Session expires at {new Date(parseInt(tokenExpirationTime)).toLocaleTimeString()}</p>)}
+                        </>
+                    ) : (
+                        <p>Loading profile...</p>
+                    )}
+                </>)}
+
             <form onSubmit={handleSubmit}>
 
                 <input
@@ -116,7 +130,7 @@ function SearchBar({ setTracks, searchType,
                 <button type="submit">Search</button>
             </form>
             <p>{loginMessage}</p>
-        </>
+        </div>
     );
 };
 

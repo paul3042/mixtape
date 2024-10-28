@@ -1,6 +1,38 @@
 .App {
-  text-align: center;
+  display: grid;
+  grid-template-areas: 
+    "header header header"
+    "searchbar search-results playlist";
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto 1fr;
+
+  height: 100vh;
+
+  /*text-align: center;*/
 }
+
+.header {
+  grid-area: header;
+  background-color: rgb(255, 135, 135);
+  
+}
+
+.searchbar {
+  grid-area: searchbar;
+  background-color: rgb(125, 125, 255);
+}
+
+.search-results {
+  grid-area: search-results;
+  background-color: rgb(160, 255, 160);
+}
+
+.playlist {
+  grid-area: playlist;
+  background-color: rgb(252, 252, 151);
+}
+
+
 
 
 

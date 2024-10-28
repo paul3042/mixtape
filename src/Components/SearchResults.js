@@ -1,7 +1,7 @@
 import React from "react";
 import AudioPreview from "./AudioPreview";
 
-function SearchResults({ tracks, searchErrorMessage,
+function SearchResults({ className, tracks, searchErrorMessage,
     selectedTracks, setSelectedTracks, searchSubmitted }) {
 
     const selectTrack = (track) => {
@@ -11,7 +11,7 @@ function SearchResults({ tracks, searchErrorMessage,
     };
 
     return (
-        <>
+        <div className={className}>
             <h2>Search Results</h2>
             {searchErrorMessage ? (
                 <p>{searchErrorMessage}</p>
@@ -29,7 +29,7 @@ function SearchResults({ tracks, searchErrorMessage,
                     )}
                 </div>
             )}
-        </>
+        </div>
     );
 }
 

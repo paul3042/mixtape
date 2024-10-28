@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import AudioPreview from "./AudioPreview";
+import SaveToSpotify from "./SaveToSpotify";
 
-function Playlist({ selectedTracks, setSelectedTracks, playlistTitle, setPlaylistTitle }) {
+function Playlist({ className, userId, selectedTracks, setSelectedTracks,
+    playlistTitle, setPlaylistTitle }) {
     const [userInput, setUserInput] = useState('');
 
     const handleUserInput = (e) => {
@@ -29,7 +31,7 @@ function Playlist({ selectedTracks, setSelectedTracks, playlistTitle, setPlaylis
     }
 
     return (
-        <>
+        <div className={className}>
             <h2>{playlistTitle}</h2>
             <form onSubmit={handleSubmit}>
                 <input
@@ -52,9 +54,13 @@ function Playlist({ selectedTracks, setSelectedTracks, playlistTitle, setPlaylis
                     ))}
                 </div>
                 <button onClick={clearPlaylist}>Remove All</button>
+                <SaveToSpotify
+                    userId={userId}
+                    selectedTracks={selectedTracks}
+                    playlistTitle={playlistTitle} />
             </form>
 
-        </>
+        </div>
     );
 }
 
