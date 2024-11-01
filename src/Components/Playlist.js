@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import AudioPreview from "./AudioPreview";
+import SaveToSpotify from "./SaveToSpotify";
+import styles from "./Playlist.module.css";
+import button2 from "./button2.module.css";
 
-function Playlist({ selectedTracks, setSelectedTracks, playlistTitle, setPlaylistTitle }) {
+
+function Playlist({ className, userId, selectedTracks, setSelectedTracks,
+    playlistTitle, setPlaylistTitle }) {
     const [userInput, setUserInput] = useState('');
 
     const handleUserInput = (e) => {
@@ -29,32 +34,45 @@ function Playlist({ selectedTracks, setSelectedTracks, playlistTitle, setPlaylis
     }
 
     return (
-        <>
-            <h2>{playlistTitle}</h2>
-            <form onSubmit={handleSubmit}>
-                <input
-                    id="playlist-title"
-                    type="text"
-                    placeholder="rename playlist"
-                    value={userInput}
-                    onChange={handleUserInput}
-                />
-                <br />
-                <button type="submit">Update</button>
-                <div>
+        <div className={`${className} ${styles.container}`}>
+            <div>
+                <h2>{playlistTitle}</h2>
+                <form className={styles.renamePlaylist} onSubmit={handleSubmit}>
+                    <input
+                        id="playlist-title"
+                        type="text"
+                        placeholder="rename playlist"
+                        value={userInput}
+                        onChange={handleUserInput}
+                    />
+                    <br />
+                    <button className={button2.button2} type="submit">Update</button>
+                </form>
+            </div>
+            <div className={styles.subContainer}>
+                <div className={styles.results}>
                     {selectedTracks.map((track) => (
-                        <div key={track.id}>
-                            <h4>{track.name}</h4>
+                        <div className={styles.tracks} key={track.id}>
+                            <h3>{track.name}</h3>
                             <p>{track.artist} | {track.album}</p>
-                            <button onClick={() => removeTrack(track)}>Remove</button>
+                            
+                            <div className={styles.buttons}>
+                                <button className={button2.button2} onClick={() => removeTrack(track)}>Remove</button>
                             <AudioPreview previewUrl={track.preview_url} />
+                        </div>
                         </div>
                     ))}
                 </div>
-                <button onClick={clearPlaylist}>Remove All</button>
+            </div>
+            <form>
+                <button className={button2.button2} onClick={clearPlaylist}>Remove All</button>
+                <SaveToSpotify
+                    userId={userId}
+                    selectedTracks={selectedTracks}
+                    playlistTitle={playlistTitle} />
             </form>
 
-        </>
+        </div>
     );
 }
 

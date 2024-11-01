@@ -1,5 +1,6 @@
 
 import React, { useState } from "react";
+import button from "./button.module.css";
 
 function SaveToSpotify({ userId, selectedTracks, playlistTitle }) {
     const [progressMessage, setProgressMessage] = useState('');
@@ -88,7 +89,7 @@ function SaveToSpotify({ userId, selectedTracks, playlistTitle }) {
 
     return (
         <>
-            <button onClick={() => handleCreatePlaylist(userId, playlistTitle, selectedTracks)}>
+            <button className={button.button} onClick={() => handleCreatePlaylist(userId, playlistTitle, selectedTracks)}>
                 Save Playlist
             </button>
             <p>{progressMessage}</p>

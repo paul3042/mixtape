@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import styles from "./button.module.css"
 
-function SpotifyLogin({ setUserId }) {
-    const [errorMessage, setErrorMessage] = useState('');
-    const [accessToken, setAccessToken] = useState(null);
-    const [tokenExpirationTime, setTokenExpirationTime] = useState(null);
-    const [userProfile, setUserProfile] = useState(null);
+function SpotifyLogin({ setUserId, accessToken, setAccessToken,
+    setTokenExpirationTime, setTokenErrorMessage }) {
+
     const stateKey = 'spotify_auth_state';
 
     useEffect(() => {
@@ -23,13 +22,12 @@ function SpotifyLogin({ setUserId }) {
                 }
 
                 const data = await response.json();
-                setUserProfile(data);
                 setUserId(data.id);
-                setErrorMessage('');
+                setTokenErrorMessage('');
 
             } catch (error) {
                 console.error('Error ferching profile data', error);
-                setErrorMessage('Failed to fetch profile data.')
+                setTokenErrorMessage('Failed to fetch profile data.')
             }
         };
 
@@ -51,14 +49,14 @@ function SpotifyLogin({ setUserId }) {
                         localStorage.removeItem('access_token');
                         localStorage.removeItem('token_expiration_time');
                         localStorage.removeItem(stateKey);
-                        setErrorMessage('Authentication failed. Please try again');
+                        setTokenErrorMessage('Authentication failed. Please try again');
                         return;
                     }
 
                     const expirationTime = new Date().getTime() + expiresIn * 1000;
                     setAccessToken(token);
                     setTokenExpirationTime(expirationTime);
-                    setErrorMessage('');
+                    setTokenErrorMessage('');
 
                     localStorage.setItem('access_token', token);
                     localStorage.setItem('token_expiration_time', expirationTime);
@@ -76,24 +74,24 @@ function SpotifyLogin({ setUserId }) {
                         if (currentTime < savedExpirationTime) {
                             setAccessToken(savedToken);
                             setTokenExpirationTime(savedExpirationTime);
-                            setErrorMessage('');
+                            setTokenErrorMessage('');
 
                             await getProfile(savedToken);
                         } else {
                             // Condition 3: remove expired credentials so process can start again
                             localStorage.removeItem('access_token');
                             localStorage.removeItem('token_expiration_time');
-                            setErrorMessage('Access token has expired. Please try again');
+                            setTokenErrorMessage('Access token has expired. Please try again');
                         }
                     }
                 }
             } catch (error) {
                 console.error('Error handling token', error);
-                setErrorMessage('Authentication error');
+                setTokenErrorMessage('Authentication error');
             }
         };
         handleToken();
-    }, [setUserId]);
+    }, [setUserId, setAccessToken, setTokenErrorMessage, setTokenExpirationTime]);
 
     // Authorisation
     const handleLogin = () => {
@@ -130,7 +128,6 @@ function SpotifyLogin({ setUserId }) {
         setUserId('');
         setAccessToken(null);
         setTokenExpirationTime(null);
-        setUserProfile(null);
         localStorage.removeItem('access_token');
         localStorage.removeItem('token_expiration_time');
         localStorage.removeItem('spotify_auth_state');
@@ -141,19 +138,10 @@ function SpotifyLogin({ setUserId }) {
 
     return (
         <>
-            {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-            {!accessToken && <button onClick={handleLogin}>Spotify Login</button>}
+            {!accessToken && <button className={styles.button} onClick={handleLogin}>Spotify Login</button>}
             {accessToken && (
                 <>
-                    <button onClick={handleSignOut}>Sign Out</button>
-                    {userProfile ? (
-                        <>
-                            <p>Signed in as {userProfile.display_name}</p>
-                            <p>Session expires at {new Date(parseInt(tokenExpirationTime)).toLocaleTimeString()}</p>
-                        </>
-                    ) : (
-                        <p>Loading profile...</p>
-                    )}
+                    <button className={styles.button} onClick={handleSignOut}>Log Out</button>
                 </>)}
         </>
     )
