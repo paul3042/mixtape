@@ -87,7 +87,7 @@ function SearchBar({ className, setTracks, searchType,
                 <div>
                     {userId ? (
                         <>
-                            <p>Welcome, {userId}!</p>
+                            <p>Welcome, <span className={styles.span}>{userId}</span>!</p>
                             {tokenErrorMessage ? (<p style={{ color: 'red' }}>{tokenErrorMessage}</p>)
                                 : (<p>This session expires at {new Date(parseInt(tokenExpirationTime)).toLocaleTimeString()}</p>)}
                         </>
@@ -99,7 +99,7 @@ function SearchBar({ className, setTracks, searchType,
                     )}
                 </div>) : (
                 (<div>
-                    <p>Welcome, music lover!</p>
+                    <p>Welcome, <span className={styles.span}>music lover!</span></p>
                     <p>Awaiting login</p>
                 </div>)
             )}

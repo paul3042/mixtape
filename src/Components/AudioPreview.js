@@ -30,7 +30,7 @@ function AudioPreview({ previewUrl }) {
         <>
             {previewUrl ? (
                 <button className={button2.button2} onClick={handlePlayPause}>
-                    {isPlaying ? 'Pause Preview' : 'Play Preview'}
+                    {isPlaying ? 'Pause' : 'Preview'}
                 </button>
             ) : (
                 <p>No preview available</p>

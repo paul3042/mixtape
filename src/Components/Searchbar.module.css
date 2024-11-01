@@ -5,8 +5,16 @@
     line-height: 1;      
 }
 
+.span {
+    color: #1DB954;
+}
+
 .form {
     line-height: 2;
+}
+
+.radio {
+    accent-color: #FDD100;
 }
 
 .radio:hover {

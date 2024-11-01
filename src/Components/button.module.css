@@ -15,8 +15,25 @@
     margin: 1em 0.5em 1em 0.5em;
 
     box-shadow: 0, 0;
+
+    transition: transform 0.2 ease;
 }
 
-.button:hover {
-    cursor: pointer;
+@media (hover: hover) {
+    .button {
+        transition: color 0.5s, background-color 0.5s;
+    }
+
+    .button:hover {
+        cursor: pointer;
+        color: #1DB954;
+        background-color: black;
+    }
+
+}
+
+.button:active {
+    transform: scale(0.9);
+    color: #1DB954;
+    background-color: black;
 }
