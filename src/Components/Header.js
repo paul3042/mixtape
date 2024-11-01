@@ -1,17 +1,19 @@
 import React from "react";
 import SpotifyLogin from "./SpotifyLogin";
+import styles from "./Header.module.css";
 
-function Header({className, setUserId, setTokenErrorMessage, accessToken, 
+function Header({ className, setUserId, setTokenErrorMessage, accessToken,
     setAccessToken, setTokenExpirationTime }) {
     return (
-        <div className={className}>
-        <h1>mixtape</h1>
-        <SpotifyLogin
-             setUserId={setUserId}
-             setTokenErrorMessage={setTokenErrorMessage}
-             accessToken={accessToken}
-             setAccessToken={setAccessToken}
-             setTokenExpirationTime={setTokenExpirationTime} />
+        <div className={`${className} ${styles.div}`}>
+            <h1 className={styles.header}>mixtape</h1>
+            <SpotifyLogin
+                className={styles.login}
+                setUserId={setUserId}
+                setTokenErrorMessage={setTokenErrorMessage}
+                accessToken={accessToken}
+                setAccessToken={setAccessToken}
+                setTokenExpirationTime={setTokenExpirationTime} />
         </div>
     );
 }

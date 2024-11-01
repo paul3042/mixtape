@@ -1,0 +1,14 @@
+.div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 1;      
+}
+
+.form {
+    line-height: 2;
+}
+
+.radio:hover {
+    cursor: pointer;
+}

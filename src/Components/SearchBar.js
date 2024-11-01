@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import styles from "./Searchbar.module.css";
+import button2 from "./button2.module.css";
 
 function SearchBar({ className, setTracks, searchType,
     setSearchType, setSearchErrorMessage, setSearchSubmitted, userId,
     accessToken, tokenExpirationTime, tokenErrorMessage }) {
     const [userInput, setUserInput] = useState('');
     const [loginMessage, setLoginMessage] = useState('');
+    const [emptySearch, setEmptySearch] = useState('');
 
 
     const handleUserInput = (e) => {
@@ -30,11 +33,13 @@ function SearchBar({ className, setTracks, searchType,
         setUserInput('');
         setSearchErrorMessage('');
         setSearchSubmitted(true);
+        setEmptySearch('');
 
         if (!userId) {
-            setLoginMessage('Please login');
+            setLoginMessage(<p>Please login</p>);
         } else {
             if (!userInput) {
+                setEmptySearch(<p>Please enter a search query!</p>);
                 setTracks([])
                 setSearchSubmitted(false);
                 return
@@ -77,21 +82,29 @@ function SearchBar({ className, setTracks, searchType,
 
 
     return (
-        <div className={className}>
-            {accessToken && (
-                <>
+        <div className={`${className} ${styles.div}`}>
+            {accessToken ? (
+                <div>
                     {userId ? (
                         <>
-                            <p>Signed in as {userId}</p>
+                            <p>Welcome, {userId}!</p>
                             {tokenErrorMessage ? (<p style={{ color: 'red' }}>{tokenErrorMessage}</p>)
-                                : (<p>Session expires at {new Date(parseInt(tokenExpirationTime)).toLocaleTimeString()}</p>)}
+                                : (<p>This session expires at {new Date(parseInt(tokenExpirationTime)).toLocaleTimeString()}</p>)}
                         </>
                     ) : (
-                        <p>Loading profile...</p>
+                        <>
+                            <p>Loading profile...</p>
+                            <p>&nbsp;</p>
+                        </>
                     )}
-                </>)}
+                </div>) : (
+                (<div>
+                    <p>Welcome, music lover!</p>
+                    <p>Awaiting login</p>
+                </div>)
+            )}
 
-            <form onSubmit={handleSubmit}>
+            <form className={styles.form} onSubmit={handleSubmit}>
 
                 <input
                     id="searchbar"
@@ -102,34 +115,39 @@ function SearchBar({ className, setTracks, searchType,
                 <br />
 
                 <label htmlFor="radio-name">Search songs by: </label>
+                <br />
                 <input
+                    className={styles.radio}
                     id="radio-name"
                     type="radio"
                     value="name"
                     checked={searchType === 'name'}
                     onChange={handleSearchType} />
-                <label htmlFor="radio-name">name</label>
+                <label className={styles.radio} htmlFor="radio-name">name</label>
 
                 <input
+                    className={styles.radio}
                     id="radio-artist"
                     type="radio"
                     value="artist"
                     checked={searchType === 'artist'}
                     onChange={handleSearchType} />
-                <label htmlFor="radio-artist">artist</label>
+                <label className={styles.radio} htmlFor="radio-artist">artist</label>
 
                 <input
+                    className={styles.radio}
                     id="radio-album"
                     type="radio"
                     value="album"
                     checked={searchType === 'album'}
                     onChange={handleSearchType} />
-                <label htmlFor="radio-album">album</label>
+                <label className={styles.radio} htmlFor="radio-album">album</label>
 
                 <br />
-                <button type="submit">Search</button>
+                <button className={button2.button2} type="submit">Search</button>
             </form>
-            <p>{loginMessage}</p>
+            {!userInput && (emptySearch)}
+            {!userId && (loginMessage)}
         </div>
     );
 };

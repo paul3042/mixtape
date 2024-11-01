@@ -22,7 +22,7 @@ function App() {
   const [tokenExpirationTime, setTokenExpirationTime] = useState(null);
 
   return (
-    <div className="App">
+    <div className="App headingFont">
       <Header
         className="header"
 
@@ -33,7 +33,7 @@ function App() {
         setTokenExpirationTime={setTokenExpirationTime} />
 
       <SearchBar
-        className="searchbar"
+        className="searchbar bodyFont"
 
         tokenErrorMessage={tokenErrorMessage}
         accessToken={accessToken}
@@ -46,8 +46,7 @@ function App() {
         userId={userId} />
 
       <SearchResults
-        className="search-results"
-
+        className="search-results bodyFont"
         tracks={tracks}
         searchErrorMessage={searchErrorMessage}
         selectedTracks={selectedTracks}
@@ -55,7 +54,7 @@ function App() {
         searchSubmitted={searchSubmitted} />
 
       <Playlist
-       className="playlist"
+       className="playlist bodyFont"
        
         userId={userId}
         selectedTracks={selectedTracks}

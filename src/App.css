@@ -1,42 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+
+.headingFont {
+  font-family: "Source Sans 3", serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.bodyFont {
+  font-family: "Merriweather Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
 .App {
   display: grid;
-  grid-template-areas: 
-    "header header header"
-    "searchbar search-results playlist";
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "header"
+    "searchbar"
+    "search-results"
+    "playlist";
+  grid-template-columns: 100%;
+  grid-template-rows: repeat(4, auto);
+  text-align: center;
+  min-height: 100vh;
+}
 
-  height: 100vh;
-
-  /*text-align: center;*/
+@media only screen and (orientation: landscape) and (min-width: 750px) {
+  .App {
+    grid-template-areas:
+      "header header header"
+      "searchbar search-results playlist";
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto 1fr;
+    max-height: 100vh;
+  }
 }
 
 .header {
   grid-area: header;
-  background-color: rgb(255, 135, 135);
-  
 }
 
 .searchbar {
   grid-area: searchbar;
-  background-color: rgb(125, 125, 255);
 }
 
 .search-results {
   grid-area: search-results;
-  background-color: rgb(160, 255, 160);
 }
 
 .playlist {
   grid-area: playlist;
-  background-color: rgb(252, 252, 151);
 }
 
+.header,
+.searchbar,
+.search-results,
+.playlist {
+  background-color: rgb(22, 22, 22);
+  margin: 8px;
+  border-radius: 15px;
+}
 
-
-
-
-
+@media only screen and (min-width: 1500px) {
+  .header,
+  .searchbar,
+  .search-results,
+  .playlist {
+    margin: 10px;
+  }
+}
 
 
 /*

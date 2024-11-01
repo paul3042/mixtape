@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import button2 from "./button2.module.css";
 
 function AudioPreview({ previewUrl }) {
     const [isPlaying, setIsPlaying] = useState(false);
@@ -28,7 +29,7 @@ function AudioPreview({ previewUrl }) {
     return (
         <>
             {previewUrl ? (
-                <button onClick={handlePlayPause}>
+                <button className={button2.button2} onClick={handlePlayPause}>
                     {isPlaying ? 'Pause Preview' : 'Play Preview'}
                 </button>
             ) : (

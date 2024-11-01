@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import styles from "./button.module.css"
 
 function SpotifyLogin({ setUserId, accessToken, setAccessToken,
     setTokenExpirationTime, setTokenErrorMessage }) {
@@ -90,7 +91,7 @@ function SpotifyLogin({ setUserId, accessToken, setAccessToken,
             }
         };
         handleToken();
-    }, [setUserId]);
+    }, [setUserId, setAccessToken, setTokenErrorMessage, setTokenExpirationTime]);
 
     // Authorisation
     const handleLogin = () => {
@@ -137,10 +138,10 @@ function SpotifyLogin({ setUserId, accessToken, setAccessToken,
 
     return (
         <>
-            {!accessToken && <button onClick={handleLogin}>Spotify Login</button>}
+            {!accessToken && <button className={styles.button} onClick={handleLogin}>Spotify Login</button>}
             {accessToken && (
                 <>
-                    <button onClick={handleSignOut}>Sign Out</button>
+                    <button className={styles.button} onClick={handleSignOut}>Log Out</button>
                 </>)}
         </>
     )
