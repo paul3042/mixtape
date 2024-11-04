@@ -95,6 +95,9 @@ function SpotifyLogin({ setUserId, accessToken, setAccessToken,
 
     // Authorisation
     const handleLogin = () => {
+
+        window.location.reload();
+
         // Generate Random String
         const generateRandomString = (length) => {
             const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -106,7 +109,7 @@ function SpotifyLogin({ setUserId, accessToken, setAccessToken,
         };
 
         const clientId = 'e9dcfcba91d74f3aa912153e71f0cd1d';
-        const redirectUri = 'http://localhost:3000/'
+        const redirectUri = 'https://my-mixtape.netlify.app/'
         const state = generateRandomString(16);
         localStorage.setItem(stateKey, state);
 
@@ -131,6 +134,8 @@ function SpotifyLogin({ setUserId, accessToken, setAccessToken,
         localStorage.removeItem('access_token');
         localStorage.removeItem('token_expiration_time');
         localStorage.removeItem('spotify_auth_state');
+
+        window.location.reload();
     };
 
 
@@ -138,10 +143,10 @@ function SpotifyLogin({ setUserId, accessToken, setAccessToken,
 
     return (
         <>
-            {!accessToken && <button className={styles.button} onClick={handleLogin}>Spotify Login</button>}
+            {!accessToken && <button className={styles.button} type="submit" onClick={handleLogin}>Spotify Login</button>}
             {accessToken && (
                 <>
-                    <button className={styles.button} onClick={handleSignOut}>Log Out</button>
+                    <button className={styles.button} type="submit" onClick={handleSignOut}>Log Out</button>
                 </>)}
         </>
     )

@@ -99,7 +99,7 @@ function SearchBar({ className, setTracks, searchType,
                     )}
                 </div>) : (
                 (<div>
-                    <p>Welcome, <span className={styles.span}>music lover!</span></p>
+                    <p>Welcome, <span className={styles.span}>music lover</span>!</p>
                     <p>Awaiting login</p>
                 </div>)
             )}

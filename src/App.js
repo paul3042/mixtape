@@ -16,7 +16,6 @@ function App() {
   const [selectedTracks, setSelectedTracks] = useState([]);
   const [playlistTitle, setPlaylistTitle] = useState('Your Playlist');
   const [searchSubmitted, setSearchSubmitted] = useState(false);
-
   const [tokenErrorMessage, setTokenErrorMessage] = useState('');
   const [accessToken, setAccessToken] = useState(null);
   const [tokenExpirationTime, setTokenExpirationTime] = useState(null);
@@ -25,7 +24,6 @@ function App() {
     <div className="App headingFont">
       <Header
         className="header"
-
         setUserId={setUserId}
         setTokenErrorMessage={setTokenErrorMessage}
         accessToken={accessToken}
@@ -34,7 +32,6 @@ function App() {
 
       <SearchBar
         className="searchbar bodyFont"
-
         tokenErrorMessage={tokenErrorMessage}
         accessToken={accessToken}
         tokenExpirationTime={tokenExpirationTime}
@@ -54,8 +51,7 @@ function App() {
         searchSubmitted={searchSubmitted} />
 
       <Playlist
-       className="playlist bodyFont"
-       
+       className="playlist bodyFont"      
         userId={userId}
         selectedTracks={selectedTracks}
         setSelectedTracks={setSelectedTracks}
