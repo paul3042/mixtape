@@ -89,7 +89,13 @@ function SaveToSpotify({ userId, selectedTracks, playlistTitle }) {
 
     return (
         <>
-            <button className={button.button} onClick={() => handleCreatePlaylist(userId, playlistTitle, selectedTracks)}>
+            <button
+                className={button.button}
+                onClick={(e) => {
+                    e.preventDefault();
+                    handleCreatePlaylist(userId, playlistTitle, selectedTracks);
+                }}
+            >
                 Save Playlist
             </button>
             <p>{progressMessage}</p>

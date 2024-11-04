@@ -27,7 +27,7 @@
   min-height: 100vh;
 }
 
-@media only screen and (orientation: landscape) and (min-width: 750px) {
+@media only screen and (orientation: landscape) and (min-width: 950px) and (min-height: 550px) {
   .App {
     grid-template-areas:
       "header header header"

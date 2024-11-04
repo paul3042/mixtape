@@ -29,7 +29,8 @@ function Playlist({ className, userId, selectedTracks, setSelectedTracks,
                 track.id !== trackToRemove.id));
     }
 
-    const clearPlaylist = () => {
+    const clearPlaylist = (e) => {
+        e.preventDefault();
         setSelectedTracks([]);
     }
 
@@ -46,7 +47,7 @@ function Playlist({ className, userId, selectedTracks, setSelectedTracks,
                         onChange={handleUserInput}
                     />
                     <br />
-                    <button className={button2.button2} type="submit">Update</button>
+                    <button className={button2.button2} type="submit">Rename</button>
                 </form>
             </div>
             <div className={styles.subContainer}>
@@ -55,11 +56,11 @@ function Playlist({ className, userId, selectedTracks, setSelectedTracks,
                         <div className={styles.tracks} key={track.id}>
                             <h3>{track.name}</h3>
                             <p>{track.artist} | {track.album}</p>
-                            
+
                             <div className={styles.buttons}>
                                 <button className={button2.button2} onClick={() => removeTrack(track)}>Remove</button>
-                            <AudioPreview previewUrl={track.preview_url} />
-                        </div>
+                                <AudioPreview previewUrl={track.preview_url} />
+                            </div>
                         </div>
                     ))}
                 </div>
